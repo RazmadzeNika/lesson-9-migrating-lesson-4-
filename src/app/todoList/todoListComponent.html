@@ -1,0 +1,27 @@
+@let todos = todos$ | async;
+@let todo = todo$ | async;
+
+<h2>Todos</h2>
+
+@if (todos) {
+  <ul>
+    @for (t of todos; track t.id) {
+      <li>{{ t.id }} — {{ t.title }}</li>
+    }
+  </ul>
+}
+
+<button (click)="decrement()">−</button>
+<button (click)="increment()">+</button>
+
+<button #randomBtn>
+  Generate random ID
+</button>
+
+<hr />
+
+@if (todo) {
+  <h3>Todo with ID {{ todo.id }}</h3>
+  <p><strong>Title:</strong> {{ todo.title }}</p>
+  <p><strong>Completed:</strong> {{ todo.completed }}</p>
+}
