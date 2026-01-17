@@ -1,11 +1,11 @@
-@let todos = todos$ | async;
-@let todo = todo$ | async;
+@let todosData = todos();
+@let todoData = todo();
 
 <h2>Todos</h2>
 
-@if (todos) {
+@if (todosData) {
   <ul>
-    @for (t of todos; track t.id) {
+    @for (t of todosData; track t.id) {
       <li>{{ t.id }} — {{ t.title }}</li>
     }
   </ul>
@@ -20,8 +20,8 @@
 
 <hr />
 
-@if (todo) {
-  <h3>Todo with ID {{ todo.id }}</h3>
-  <p><strong>Title:</strong> {{ todo.title }}</p>
-  <p><strong>Completed:</strong> {{ todo.completed }}</p>
+@if (todoData) {
+  <h3>Todo with ID {{ todoData.id }}</h3>
+  <p><strong>Title:</strong> {{ todoData.title }}</p>
+  <p><strong>Completed:</strong> {{ todoData.completed }}</p>
 }

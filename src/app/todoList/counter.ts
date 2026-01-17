@@ -1,23 +1,20 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {Injectable, signal} from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class Counter {
-  private readonly _value = new BehaviorSubject<number>(Math.floor(Math.random() * 200) + 1);
-  readonly value$ = this._value.asObservable();
+  // private readonly _value = new BehaviorSubject<number>(Math.floor(Math.random() * 200) + 1);
+  // readonly value$ = this._value.asObservable();
+  value = signal(Math.floor(Math.random() * 100));
 
   set(value: number) {
-    this._value.next(value);
+    this.value.set(value);
   }
 
   increment() {
-    this._value.next(this._value.value + 1);
+    this.value.update(value=>value+1);
   }
 
   decrement() {
-    const next = this._value.value - 1;
-    if (next > 0) {
-      this._value.next(next);
-    }
+    this.value.update(value=>Math.max(1,value-1));
   }
 }
